@@ -13,6 +13,7 @@ import Kayttoliittyma.Teksti;
 public class Main {
     public static void main(String[] args){
         Laivanupotus laiva = new Laivanupotus();
-        Teksti kayttoliittyma = new Teksti(laiva);
+        Teksti kayttoliittyma = new Teksti();
+        
     }
 }

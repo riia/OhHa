@@ -37,9 +37,9 @@ public class RuutuTest {
     }
     
     @Test
-    public void konstruktoriLuoLaivattomanRuudun(){
+    public void konstruktoriLuoAmpumattomanRuudun(){
         Ruutu ruutu = new Ruutu();
-        boolean vastaus = ruutu.getLaiva();
+        boolean vastaus = ruutu.getAmmuttu();
         assertEquals(false, vastaus);
     }
     // TODO add test methods here.

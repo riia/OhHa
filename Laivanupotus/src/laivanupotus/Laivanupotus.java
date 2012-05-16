@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Laivanupotus {
     Scanner scan = new Scanner(System.in);
     
-    Laivanupotus peli;  
+      
     String pelaaja;
     int laivojaJaljella = 10;
     
@@ -27,8 +27,7 @@ public class Laivanupotus {
 
 
     public void sijoitaLaivat() {
-        ruudukko[1][1].setLaiva();
-        ruudukko[1][2].setLaiva();
+
     }
 
     public boolean onkoAmmuttu(int x, int y) {
@@ -39,20 +38,14 @@ public class Laivanupotus {
     }
 
     public boolean onkoLaivaa(int x, int y) {
-        if (ruudukko[x][y].laiva) {
-            return true;
-        }
+        
         return false;
     }
 
     public void ammu(int x, int y) {
         if (x > 10 || y > 10){
             System.out.println("Ruutu ei kentällä.");
-        }else if (ruudukko[x][y].getLaiva() && !ruudukko[x][y].getAmmuttu()){
-            laivojaJaljella--;
-            ruudukko[x][y].setAmmuttu();
-        }
-        else {
+        }else {
             ruudukko[x][y].setAmmuttu();
         }
     }

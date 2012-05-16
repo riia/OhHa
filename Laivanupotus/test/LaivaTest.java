@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 
+import laivanupotus.Laiva;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -34,9 +35,11 @@ public class LaivaTest {
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
+    @Test
+    public void konstruktoriLuoOikeanKokoisenLaivan(){
+        Laiva laiva = new Laiva(3);
+        int koko = laiva.GetKoko();
+        assertEquals(3, koko);
+    }
 }
