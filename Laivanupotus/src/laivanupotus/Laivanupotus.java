@@ -15,39 +15,55 @@ public class Laivanupotus {
     
     Laivanupotus peli;  
     String pelaaja;
+    int laivojaJaljella = 10;
     
     Ruutu[][] ruudukko = new Ruutu[10][10];
 
 
-    public void KysyNimi() {
+    public void kysyNimi() {
         System.out.println("Nimesi:");
         pelaaja = scan.nextLine();
     }
 
 
-    public void SijoitaLaivat() {
-        ruudukko[1][1] = new Ruutu(true, false);
+    public void sijoitaLaivat() {
+        ruudukko[1][1].setLaiva();
+        ruudukko[1][2].setLaiva();
     }
 
-    public boolean OnkoAmmuttu(int x, int y) {
+    public boolean onkoAmmuttu(int x, int y) {
         if (ruudukko[x][y].ammuttu) {
             return true;
         }
         return false;
     }
 
-    public boolean OnkoLaivaa(int x, int y) {
+    public boolean onkoLaivaa(int x, int y) {
         if (ruudukko[x][y].laiva) {
             return true;
         }
         return false;
     }
 
-    public void Ammu(int x, int y) {
+    public void ammu(int x, int y) {
         if (x > 10 || y > 10){
             System.out.println("Ruutu ei kentällä.");
-        }else {
+        }else if (ruudukko[x][y].getLaiva() && !ruudukko[x][y].getAmmuttu()){
+            laivojaJaljella--;
             ruudukko[x][y].setAmmuttu();
+        }
+        else {
+            ruudukko[x][y].setAmmuttu();
+        }
+    }
+    
+    public void pelaa(){
+        while (laivojaJaljella > 0){
+            System.out.println("Rivi?");
+            int rivi = scan.nextInt();
+            System.out.println("Sarake?");
+            int sarake = scan.nextInt();
+            ammu(rivi, sarake);
         }
     }
 
