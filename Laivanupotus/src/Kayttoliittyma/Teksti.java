@@ -4,10 +4,13 @@
  */
 package Kayttoliittyma;
 
+import laivanupotus.Laivanupotus;
+
 /**
  *
  * @author ohtamaa
  */
 public class Teksti {
+    
     
 }

@@ -14,20 +14,21 @@ public class Ruutu {
     boolean ammuttu;
 
     public Ruutu(){
-        
         this.ammuttu = false;
     }
-    public Ruutu(Laiva laiva, boolean ammuttu) {
-        this.laiva = laiva;
-        this.ammuttu = ammuttu;
-    }
-
+    
     public boolean getAmmuttu() {
         return this.ammuttu;
     }
     
-    
+    public Laiva getLaiva(){
+        return laiva;
+    }
     public boolean setAmmuttu(){
         return ammuttu = true;
+    }
+    
+    public Laiva setLaiva(Laiva laiva){
+        return this.laiva = laiva;
     }
 }

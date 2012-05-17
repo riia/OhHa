@@ -30,6 +30,7 @@ public class LaivaTest {
     
     @Before
     public void setUp() {
+        
     }
     
     @After
@@ -39,7 +40,31 @@ public class LaivaTest {
     @Test
     public void konstruktoriLuoOikeanKokoisenLaivan(){
         Laiva laiva = new Laiva(3);
-        int koko = laiva.GetKoko();
+        int koko = laiva.getKoko();
         assertEquals(3, koko);
+    }
+    @Test
+    public void laivaanOsuminenKasvattaaOsumienMaaraa(){
+        Laiva laiva = new Laiva(3);
+        laiva.osuLaivaan();
+        int osumat = laiva.getOsumienMaara();
+        assertEquals(1, osumat);
+    }
+    
+    @Test
+    public void laivaUppoaa(){
+        Laiva laiva = new Laiva(2);
+        laiva.osuLaivaan();
+        laiva.osuLaivaan();
+        boolean vastaus = laiva.upposiko();
+        assertEquals(true, vastaus);
+    }
+    
+    @Test
+    public void laivaEiUppoa(){
+        Laiva laiva = new Laiva(2);
+        laiva.osuLaivaan();
+        boolean vastaus = laiva.upposiko();
+        assertEquals(false, vastaus);
     }
 }
