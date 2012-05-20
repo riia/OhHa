@@ -13,7 +13,8 @@ import Kayttoliittyma.Teksti;
 public class Main {
     public static void main(String[] args){
         Laivanupotus laiva = new Laivanupotus();
+        laiva.alustaRuudukko();
         Teksti kayttoliittyma = new Teksti();
-        
+        kayttoliittyma.tulostaPeli(laiva);
     }
 }

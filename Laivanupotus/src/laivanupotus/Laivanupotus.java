@@ -19,6 +19,7 @@ public class Laivanupotus {
 
     public Laivanupotus() {
         this.laivojaJaljella = 5;
+        
     }
     
     

@@ -15,6 +15,7 @@ public class Ruutu {
 
     public Ruutu(){
         this.ammuttu = false;
+        this.laiva = new Laiva(0);
     }
     
     public boolean getAmmuttu() {
