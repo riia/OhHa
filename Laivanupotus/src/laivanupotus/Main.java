@@ -11,10 +11,12 @@ import Kayttoliittyma.Teksti;
  * @author ohtamaa
  */
 public class Main {
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         Laivanupotus laiva = new Laivanupotus();
         laiva.alustaRuudukko();
-        Teksti kayttoliittyma = new Teksti();
-        kayttoliittyma.tulostaPeli(laiva);
+        Teksti kayttoliittyma = new Teksti(laiva);
+        laiva.ammu(1, 1);
+        
     }
 }

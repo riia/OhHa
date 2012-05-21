@@ -18,25 +18,39 @@ public class Laiva {
         osumienMaara = 0;
     }
 
+    /**
+     *
+     * Palauttaa laivan koon
+     */
     public int getKoko() {
         return koko;
     }
-    
-    public int getOsumienMaara(){
+
+    /**
+     *
+     * Palauttaa laivan osumien määrän
+     */
+    public int getOsumienMaara() {
         return osumienMaara;
     }
 
-    public boolean upposiko(){
+    /**
+     *
+     * Tarkistaa onko laiva uponnut
+     */
+    public boolean onkoUponnut() {
         if (osumienMaara == koko) {
             return true;
         } else {
             return false;
         }
     }
-    
+
+    /**
+     *
+     * Lisää laivan osumien määrää
+     */
     public void osuLaivaan() {
         osumienMaara++;
     }
-    
-    
 }

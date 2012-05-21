@@ -56,7 +56,7 @@ public class LaivaTest {
         Laiva laiva = new Laiva(2);
         laiva.osuLaivaan();
         laiva.osuLaivaan();
-        boolean vastaus = laiva.upposiko();
+        boolean vastaus = laiva.onkoUponnut();
         assertEquals(true, vastaus);
     }
     
@@ -64,7 +64,7 @@ public class LaivaTest {
     public void laivaEiUppoa(){
         Laiva laiva = new Laiva(2);
         laiva.osuLaivaan();
-        boolean vastaus = laiva.upposiko();
+        boolean vastaus = laiva.onkoUponnut();
         assertEquals(false, vastaus);
     }
 }

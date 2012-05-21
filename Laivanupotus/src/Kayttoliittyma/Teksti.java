@@ -4,6 +4,7 @@
  */
 package Kayttoliittyma;
 
+import laivanupotus.Laiva;
 import laivanupotus.Laivanupotus;
 
 /**
@@ -12,23 +13,33 @@ import laivanupotus.Laivanupotus;
  */
 public class Teksti {
 
-    public Teksti(){
+    Laivanupotus laiva;
+   
+    public Teksti(Laivanupotus laiva){
+        this.laiva = laiva;
         
     }
     
-    public void tulostaPeli(Laivanupotus peli) {
+    public void run(){
+        System.out.println("Tervetuloa!");
+        laiva.kysyNimi();
+        laiva.kysyRuudukonKoko();
+        laiva.pelaa();
+    }
+    
+    public void tulostaPeli() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                if (!peli.ruudukko[i][j].getAmmuttu()) {
+                if (!laiva.ruudukko[i][j].getAmmuttu()) {
                     System.out.println("O");
-                } else if (peli.ruudukko[i][j].getAmmuttu() 
-                        && peli.ruudukko[i][j].getLaiva().getKoko() == 0) {
+                } else if (laiva.ruudukko[i][j].getAmmuttu() 
+                        && laiva.ruudukko[i][j].getLaiva().getKoko() == 0) {
                     System.out.println("X");
-                } else if (peli.ruudukko[i][j].getAmmuttu() 
-                        && peli.ruudukko[i][j].getLaiva().getKoko() != 0){
+                } else if (laiva.ruudukko[i][j].getAmmuttu() 
+                        && laiva.ruudukko[i][j].getLaiva().getKoko() != 0){
                     System.out.println("L");
-                } else if (peli.ruudukko[i][j].getAmmuttu() 
-                        && peli.ruudukko[i][j].getLaiva().upposiko()){
+                } else if (laiva.ruudukko[i][j].getAmmuttu() 
+                        && laiva.ruudukko[i][j].getLaiva().onkoUponnut()){
                     System.out.println("*");
                 }
              

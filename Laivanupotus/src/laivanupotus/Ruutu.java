@@ -10,26 +10,44 @@ package laivanupotus;
  */
 public class Ruutu {
 
+    Laiva eiLaivaa = new Laiva(0);
     Laiva laiva;
     boolean ammuttu;
 
-    public Ruutu(){
+    public Ruutu() {
         this.ammuttu = false;
-        this.laiva = new Laiva(0);
+        this.laiva = eiLaivaa;
     }
-    
+
+    /**
+     *
+     * Kertoo onko ruutua ammuttu
+     */
     public boolean getAmmuttu() {
-        return this.ammuttu;
+        return ammuttu;
     }
-    
-    public Laiva getLaiva(){
+
+    /**
+     *
+     * Palauttaa ruudussa olevan laivan
+     */
+    public Laiva getLaiva() {
         return laiva;
     }
-    public boolean setAmmuttu(){
+
+    /**
+     *
+     * Määrittää ruudun ammutuksi
+     */
+    public boolean setAmmuttu() {
         return ammuttu = true;
     }
-    
-    public Laiva setLaiva(Laiva laiva){
+
+    /**
+     *
+     * Asettaa ruutuun laivan
+     */
+    public Laiva setLaiva(Laiva laiva) {
         return this.laiva = laiva;
     }
 }
