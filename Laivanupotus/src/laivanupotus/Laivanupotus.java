@@ -4,6 +4,7 @@
  */
 package laivanupotus;
 
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -22,7 +23,7 @@ public class Laivanupotus {
     public Laivanupotus() {
         korkeus = 10;
         leveys = 10;
-        this.laivojaJaljella = 5;
+        this.laivojaJaljella = 0;
         ruudukko = new Ruutu[leveys][korkeus];
     }
 
@@ -32,7 +33,7 @@ public class Laivanupotus {
     }
 
     public void alustaRuudukko() {
-        
+
         for (int i = 0; i < korkeus; i++) {
             for (int j = 0; j < leveys; j++) {
                 ruudukko[i][j] = new Ruutu();
@@ -53,6 +54,22 @@ public class Laivanupotus {
 
     /**
      *
+     * Palauttaa ruudukon korkeuden
+     */
+    public int getKorkeus() {
+        return korkeus;
+    }
+
+    /**
+     *
+     * Palauttaa ruudukon leveyden
+     */
+    public int getLeveys() {
+        return leveys;
+    }
+
+    /**
+     *
      * Kysytään käyttäjän nimi tuloslistaa varten
      */
     public void kysyNimi() {
@@ -60,12 +77,54 @@ public class Laivanupotus {
         pelaaja = scan.nextLine();
     }
 
+    public void sijoitaLaivaSatunnaiseen(Laiva laiva) {
+        Random arpoja = new Random();
+        int rivi = arpoja.nextInt(korkeus);
+        int sarake = arpoja.nextInt(leveys);
+
+        int suunta = arpoja.nextInt(4);
+
+        int laivaaJaljella = laiva.getKoko();
+
+        while (laivaaJaljella > 0) {
+            if (!onkoLaivaa(rivi, sarake)) {
+                
+                laivaaJaljella--;
+                if (suunta == 0) {
+                    rivi--;
+                } else if (suunta == 1) {
+                    sarake++;
+                } else if (suunta == 2) {
+                    rivi++;
+                } else if (suunta == 3) {
+                    sarake--;
+                }
+            } else
+                break;
+
+
+
+        }
+
+
+
+        sijoitaLaiva(laiva, rivi, sarake);
+    }
+
     /**
      *
-     * Sijoittaa laivat ruudukkoon
+     * Sijoittaa laivan ruudukkoon
      */
-    public void sijoitaLaiva(Laiva laiva, int x, int y) {
-        ruudukko[x][y].setLaiva(laiva);
+    public boolean sijoitaLaiva(Laiva laiva, int x, int y) {
+
+        if (onkoLaivaa(x, y)) {
+            return false;
+        } else {
+            ruudukko[x][y].setLaiva(laiva);
+            laivojaJaljella++;
+            return true;
+        }
+
     }
 
     /**
@@ -73,7 +132,7 @@ public class Laivanupotus {
      * Tarkistaa ovatko koordinaatit ruudukolla
      */
     public boolean osuikoRuudukkoon(int x, int y) {
-        if (x < 0 || y < 0 || x > korkeus || y > leveys) {
+        if (x < 0 || y < 0 || x >= korkeus || y >= leveys) {
             return false;
         }
         return true;
@@ -84,7 +143,7 @@ public class Laivanupotus {
      * Tarkistaa onko ruudussa laivaa
      */
     public boolean onkoLaivaa(int x, int y) {
-        if (ruudukko[x][y].getLaiva().getKoko() == 0) {
+        if (ruudukko[x][y].getLaiva() == null) {
             return false;
         }
         return true;
@@ -95,48 +154,42 @@ public class Laivanupotus {
      * Tarkistaa onko ruutua jo ammuttu
      */
     public boolean onkoAmmuttu(int x, int y) {
-        if (ruudukko[x][y].getAmmuttu()) {
-            return true;
-        }
-        return false;
+        return ruudukko[x][y].getAmmuttu();
     }
 
     /**
      *
      * Ammutaan ruutua
      */
-    public boolean ammu(int x, int y) {
-        if (!osuikoRuudukkoon(x, y)) {
-            System.out.println("Ruutu ei sijaitse ruudukolla");
-            return false;
-        } else if (onkoAmmuttu(x, y)) {
-            System.out.println("Olet jo ampunut tähän ruutuun.");
-            return false;
+    public int ammu(int x, int y) {
+
+        if (!osuikoRuudukkoon(x, y) || onkoAmmuttu(x, y)) {
+            return -1;
         } else {
             ruudukko[x][y].setAmmuttu();
-            if (onkoLaivaa(x, y)) {                             //ruudussa on laiva
+            if (onkoLaivaa(x, y)) {
+
                 ruudukko[x][y].getLaiva().osuLaivaan();
+
                 if (ruudukko[x][y].getLaiva().onkoUponnut()) {
                     laivojaJaljella--;
-                    System.out.println("Osui ja upposi!");
-                } else {
-                    System.out.println("Osui!");
+                    return 2;
                 }
-            } else {                                            //ruudussa ei ole laivaa
-                System.out.println("Ohi meni.");
+                return 1;
             }
-
-            return true;
+            return 0;
         }
     }
 
-    public void pelaa() {
-        while (laivojaJaljella > 0) {
-            System.out.println("Rivi? (0-9)");
-            int rivi = scan.nextInt();
-            System.out.println("Sarake? (0-9)");
-            int sarake = scan.nextInt();
-            ammu(rivi, sarake);
+    /**
+     *
+     * Tarkistaa onko laivoja vielä löytämättä eli vieläkö peliä jatketaan
+     */
+    public boolean onkoPeliaJaljella() {
+        if (laivojaJaljella > 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

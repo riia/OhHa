@@ -41,28 +41,32 @@ public class LaivanupotusTest {
     
     @Test
     public void negatiiviseenRuutuunEiVoiAmpua(){
-        boolean vastaus = laivapeli.ammu(-1, -1);
-        assertEquals(false, vastaus);
+        int vastaus = laivapeli.ammu(-1, -1);
+        assertEquals(-1, vastaus);
     }
     
     @Test
     public void liianSuureenRuutuunEiVoiAmpua(){
-        boolean vastaus = laivapeli.ammu(11, 1);
-        assertEquals(false, vastaus);
+        int vastaus = laivapeli.ammu(9, 10);
+        assertEquals(-1, vastaus);
+        vastaus = laivapeli.ammu(10, 9);
+        assertEquals(-1, vastaus);
     }
     
     @Test
     public void ampuminenOnnistuu(){
+        int vastaus = laivapeli.ammu(9, 9);
+        assertEquals(0, vastaus);
+        vastaus = laivapeli.ammu(0, 0);
+        assertEquals(0, vastaus);
         
-        boolean vastaus = laivapeli.ammu(3, 3);
-        assertEquals(true, vastaus);
     }
     
     @Test 
     public void samaanRuutuunEiVoiAmpuaUudestaan(){
         laivapeli.ammu(1, 1);
-        boolean vastaus = laivapeli.ammu(1, 1);
-        assertEquals(false, vastaus);
+        int vastaus = laivapeli.ammu(1, 1);
+        assertEquals(-1, vastaus);
     }
     
     @Test
@@ -73,5 +77,14 @@ public class LaivanupotusTest {
         laivapeli.sijoitaLaiva(paatti, 1, 1);
         vastaus = laivapeli.onkoLaivaa(1, 1);
         assertEquals(true, vastaus);
+    }
+    
+    @Test
+    public void laivaUppoaaKunOsutaanTarpeeksiMontaKertaa(){
+        laivapeli.sijoitaLaiva(paatti, 1, 1);
+        laivapeli.sijoitaLaiva(paatti, 1, 2);
+        laivapeli.ammu(1, 1);
+        int vastaus = laivapeli.ammu(1, 2);
+        assertEquals(2, vastaus);
     }
 }

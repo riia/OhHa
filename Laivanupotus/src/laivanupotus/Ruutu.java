@@ -10,13 +10,13 @@ package laivanupotus;
  */
 public class Ruutu {
 
-    Laiva eiLaivaa = new Laiva(0);
+    
     Laiva laiva;
     boolean ammuttu;
 
     public Ruutu() {
         this.ammuttu = false;
-        this.laiva = eiLaivaa;
+        this.laiva = null;
     }
 
     /**
@@ -39,15 +39,15 @@ public class Ruutu {
      *
      * Määrittää ruudun ammutuksi
      */
-    public boolean setAmmuttu() {
-        return ammuttu = true;
+    public void setAmmuttu() {
+        ammuttu = true;
     }
 
     /**
      *
      * Asettaa ruutuun laivan
      */
-    public Laiva setLaiva(Laiva laiva) {
-        return this.laiva = laiva;
+    public void setLaiva(Laiva laiva) {
+        this.laiva = laiva;
     }
 }
