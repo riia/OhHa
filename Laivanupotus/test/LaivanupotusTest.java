@@ -20,6 +20,7 @@ public class LaivanupotusTest {
     
     Laivanupotus laivapeli;
     Laiva paatti;
+    Laiva vene;
     
     public LaivanupotusTest() {
     }
@@ -29,6 +30,7 @@ public class LaivanupotusTest {
         laivapeli = new Laivanupotus();
         laivapeli.alustaRuudukko();
         paatti = new Laiva(2);
+        vene = new Laiva(1);
     }
     
     @After
@@ -86,5 +88,17 @@ public class LaivanupotusTest {
         laivapeli.ammu(1, 1);
         int vastaus = laivapeli.ammu(1, 2);
         assertEquals(2, vastaus);
+    }
+    
+    @Test
+    public void sopivaLaivaSopiiRuudukkoon(){
+        boolean vastaus = laivapeli.sopiikoLaiva(1, 1, 0, paatti);
+        assertEquals(true, vastaus);
+    }
+    
+    @Test  
+    public void laivaaEiVoiSijoittaaRuudukonUlkopuolelle(){
+        boolean vastaus = laivapeli.sopiikoLaiva(9, 9, 0, paatti);
+        assertEquals(false, vastaus);
     }
 }

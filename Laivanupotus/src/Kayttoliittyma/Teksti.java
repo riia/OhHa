@@ -10,7 +10,7 @@ import laivanupotus.Laivanupotus;
 
 /**
  *
- * @author ohtamaa
+ * Teksti-käyttöliittymä
  */
 public class Teksti {
 
@@ -23,14 +23,33 @@ public class Teksti {
 
     }
 
+    public void ruudukonTulostus(){
+        for (int i = 0; i < peli.getKorkeus(); i++) {
+            for (int j = 0; j < peli.getLeveys(); j++) {
+                if(peli.onkoLaivaa(i, j)) {
+                    System.out.print("L");
+                } else{
+                    System.out.print("O");
+                }
+            }
+            System.out.println();
+        }
+    }
     public void run() {
         System.out.println("Tervetuloa!");
+        
+        
         Laiva paatti = new Laiva(2);
-
+        Laiva vene = new Laiva(1);
+        
+        
         peli.alustaRuudukko();
-
-        peli.sijoitaLaiva(paatti, 1,1);
-
+        
+        peli.sijoitaLaivaSatunnaiseen(paatti);
+        peli.sijoitaLaivaSatunnaiseen(vene);
+        
+        ruudukonTulostus();
+        
         while (peli.onkoPeliaJaljella()) {
             tulostaPeli();
             System.out.println("Valitse rivi:");
@@ -51,6 +70,7 @@ public class Teksti {
                 }
             }
         }
+        System.out.println("Peli loppui!");
     }
 
     public void tulostaPeli() {
