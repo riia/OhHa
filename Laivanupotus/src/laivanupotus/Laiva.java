@@ -5,7 +5,7 @@
 package laivanupotus;
 
 /**
- *
+ * 
  * @author ohtamaa
  */
 public class Laiva {

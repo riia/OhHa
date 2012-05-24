@@ -8,7 +8,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- *
+ * Laivanupotuspelin pelialusta. Ruutu-olioista koostuva ruudukko, jonne voi
+ * sijoittaa laivoja ja jota voi ampua.
  * @author ohtamaa
  */
 public class Laivanupotus {
@@ -28,9 +29,20 @@ public class Laivanupotus {
         ruudukko = new Ruutu[leveys][korkeus];
     }
 
-    public String toString() {
+    /**
+     *
+     * Asettaa ruudukon korkeuden
+     */
+    public void setKorkeus(int korkeus) {
+        this.korkeus = korkeus;
+    }
 
-        return "";
+    /**
+     *
+     * Asettaa ruudukon leveyden
+     */
+    public void setLeveys(int leveys) {
+        this.leveys = leveys;
     }
 
     /**
@@ -44,17 +56,6 @@ public class Laivanupotus {
                 ruudukko[i][j] = new Ruutu();
             }
         }
-    }
-
-    /**
-     *
-     * Kysytään käyttäjältä ruudukon korkeus ja leveys
-     */
-    public void kysyRuudukonKoko() {
-        System.out.println("Ruudukon korkeus:");
-        korkeus = scan.nextInt();
-        System.out.println("Ruudukon leveys:");
-        leveys = scan.nextInt();
     }
 
     /**
@@ -77,21 +78,23 @@ public class Laivanupotus {
      *
      * Kysytään käyttäjän nimi tuloslistaa varten
      */
-    public void kysyNimi() {
-        System.out.println("Nimesi:");
-        String pelaajanNimi = scan.nextLine();
-        pelaaja = new Pelaaja(pelaajanNimi);
+    public void setPelaaja(Pelaaja pelaaja) {
+        this.pelaaja = pelaaja;
+
     }
 
+    
     /**
      *
      * Tarkistaa voiko laivaa sijoittaa kohdasta (x,y) lähtien
      */
     public boolean sopiikoLaiva(int x, int y, int suunta, Laiva laiva) {
         int laivaaJaljella = laiva.getKoko();
+
         boolean sopiiko = false;
+
         while (laivaaJaljella > 0) {
-            if (!onkoLaivaa(x, y) && x<korkeus && y<leveys) {
+            if (osuikoRuudukkoon(x, y) && !onkoLaivaa(x, y)) {
                 sopiiko = true;
                 laivaaJaljella--;
                 if (suunta == 0) {
@@ -117,39 +120,36 @@ public class Laivanupotus {
      */
     public void sijoitaLaivaSatunnaiseen(Laiva laiva) {
         Random arpoja = new Random();
-        int rivi = arpoja.nextInt(korkeus);
-        int sarake = arpoja.nextInt(leveys);
-        int suunta = arpoja.nextInt(2);
+        int rivi;
+        int sarake;
+        int suunta;
 
-        if (sopiikoLaiva(rivi, sarake, suunta, laiva)) {
-            int laivaaJaljella = laiva.getKoko();
+        do {
+            rivi = arpoja.nextInt(korkeus);
+            sarake = arpoja.nextInt(leveys);
+            suunta = arpoja.nextInt(2);
+        } while (!sopiikoLaiva(rivi, sarake, suunta, laiva));
 
-            while (laivaaJaljella > 0) {
-                sijoitaLaiva(laiva, rivi, sarake);
-                laivaaJaljella--;
-                if (suunta == 0) {
-                    rivi++;
-                } else {
-                    sarake++;
-                }
+        int laivaaJaljella = laiva.getKoko();
+
+        while (laivaaJaljella > 0) {
+            sijoitaLaiva(laiva, rivi, sarake);
+            laivaaJaljella--;
+            if (suunta == 0) {
+                rivi++;
+            } else {
+                sarake++;
             }
-            laivojaJaljella++;
         }
+        laivojaJaljella++;
     }
 
     /**
      *
      * Sijoittaa laivan ruudukkoon kohtaan (x,y)
      */
-    public boolean sijoitaLaiva(Laiva laiva, int x, int y) {
-
-        if (onkoLaivaa(x, y)) {
-            return false;
-        } else {
-            ruudukko[x][y].setLaiva(laiva);
-            return true;
-        }
-
+    public void sijoitaLaiva(Laiva laiva, int x, int y) {
+        ruudukko[x][y].setLaiva(laiva);
     }
 
     /**
@@ -187,16 +187,14 @@ public class Laivanupotus {
      * Ammutaan ruutua
      */
     public int ammu(int x, int y) {
-        
+
         if (!osuikoRuudukkoon(x, y) || onkoAmmuttu(x, y)) {
             return -1;
         } else {
             ruudukko[x][y].setAmmuttu();
             ampumistenMaara++;
             if (onkoLaivaa(x, y)) {
-
                 ruudukko[x][y].getLaiva().osuLaivaan();
-
                 if (ruudukko[x][y].getLaiva().onkoUponnut()) {
                     laivojaJaljella--;
                     return 2;

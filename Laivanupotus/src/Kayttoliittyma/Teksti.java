@@ -22,6 +22,24 @@ public class Teksti {
 
 
     }
+    /**
+     *
+     * Kysytään käyttäjältä ruudukon korkeus ja leveys
+     */
+    public void kysyRuudukonKoko() {
+        System.out.println("Ruudukon korkeus:");
+        int korkeus = scan.nextInt();
+        peli.setKorkeus(korkeus);
+        System.out.println("Ruudukon leveys:");
+        int leveys = scan.nextInt();
+        peli.setLeveys(leveys);
+    }
+    
+    public void kysyPelaaja(){
+        System.out.println("Nimesi:");
+        String nimi = scan.nextLine();
+        
+    }
 
     public void ruudukonTulostus(){
         for (int i = 0; i < peli.getKorkeus(); i++) {

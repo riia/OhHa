@@ -3,6 +3,8 @@
  * and open the template in the editor.
  */
 
+import laivanupotus.Laiva;
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import laivanupotus.Ruutu;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -41,6 +43,14 @@ public class RuutuTest {
         Ruutu ruutu = new Ruutu();
         boolean vastaus = ruutu.getAmmuttu();
         assertEquals(false, vastaus);
+    }
+    
+    @Test
+    public void konstruktoriLuoLaivattomanRuudun(){
+        Ruutu ruutu = new Ruutu();
+        Laiva vastaus = ruutu.getLaiva();
+        assertEquals(null, vastaus);
+        
     }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

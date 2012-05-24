@@ -52,7 +52,7 @@ public class LaivaTest {
     }
     
     @Test
-    public void laivaUppoaa(){
+    public void laivaUppoaaKunSiihenOsuuTarpeeksiMontaKertaa(){
         Laiva laiva = new Laiva(2);
         laiva.osuLaivaan();
         laiva.osuLaivaan();
@@ -61,7 +61,7 @@ public class LaivaTest {
     }
     
     @Test
-    public void laivaEiUppoa(){
+    public void laivaEiUppoaKunEiOleOsuttuTarpeeksi(){
         Laiva laiva = new Laiva(2);
         laiva.osuLaivaan();
         boolean vastaus = laiva.onkoUponnut();

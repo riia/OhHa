@@ -4,6 +4,7 @@
  */
 package laivanupotus;
 
+import Kayttoliittyma.Graafinen;
 import Kayttoliittyma.Teksti;
 
 /**
@@ -14,9 +15,12 @@ public class Main {
 
     public static void main(String[] args) {
         Laivanupotus laiva = new Laivanupotus();
-        Teksti kayttoliittyma = new Teksti(laiva);
+//        Teksti kayttoliittyma = new Teksti(laiva);
+//        
+//        kayttoliittyma.run();
         
-        kayttoliittyma.run();
+        Graafinen graa = new Graafinen();
+        graa.run();
         
     }
 }
