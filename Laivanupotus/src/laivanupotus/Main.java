@@ -19,8 +19,8 @@ public class Main {
 //        
 //        kayttoliittyma.run();
         
-        Graafinen graa = new Graafinen();
-        graa.run();
+        Graafinen graaf = new Graafinen();
+        graaf.run();
         
     }
 }
