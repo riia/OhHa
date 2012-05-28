@@ -6,7 +6,8 @@ package laivanupotus;
 
 /**
  *
- * @author ohtamaa
+ * Ruutu-luokka. Ruutuun voi sijoittaa Laiva-olion ja ruudulla on tieto onko
+ * sitä ammuttu.
  */
 public class Ruutu {
 

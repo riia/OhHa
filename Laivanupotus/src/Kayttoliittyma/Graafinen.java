@@ -23,7 +23,7 @@ import laivanupotus.Laivanupotus;
 
 /**
  *
- * @author ohtamaa
+ * Laivanupotuspelin graafinen käyttöliittymä.
  */
 public class Graafinen implements Runnable, ActionListener {
 

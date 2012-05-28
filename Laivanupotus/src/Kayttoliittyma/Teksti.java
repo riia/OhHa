@@ -10,7 +10,7 @@ import laivanupotus.Laivanupotus;
 
 /**
  *
- * Teksti-käyttöliittymä
+ * Laivanupotuspelin teksti-käyttöliittymä.
  */
 public class Teksti {
 

@@ -6,7 +6,7 @@ package laivanupotus;
 
 /**
  *
- * @author ohtamaa
+ * Ppelaaja-luokasta löytyy pelaajan nimi ja paras tulos pelissä.
  */
 public class Pelaaja {
     

@@ -6,7 +6,7 @@ package laivanupotus;
 
 /**
  * 
- * @author ohtamaa
+ * Laiva-luokka. Laivalla on koko ja tieto kuinka monta kertaa siihen on osuttu.
  */
 public class Laiva {
 

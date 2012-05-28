@@ -14,7 +14,7 @@ import java.util.Scanner;
 /**
  * Laivanupotuspelin pelialusta. Ruutu-olioista koostuva ruudukko, jonne voi
  * sijoittaa laivoja ja jota voi ampua.
- * @author ohtamaa
+ * 
  */
 public class Laivanupotus implements ActionListener{
 
