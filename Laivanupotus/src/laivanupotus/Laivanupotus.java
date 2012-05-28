@@ -4,6 +4,10 @@
  */
 package laivanupotus;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -12,9 +16,10 @@ import java.util.Scanner;
  * sijoittaa laivoja ja jota voi ampua.
  * @author ohtamaa
  */
-public class Laivanupotus {
+public class Laivanupotus implements ActionListener{
 
     Scanner scan = new Scanner(System.in);
+    ArrayList<Pelaaja> Lista = new ArrayList<Pelaaja>();
     Pelaaja pelaaja;
     int ampumistenMaara = 0;
     int laivojaJaljella;
@@ -205,6 +210,7 @@ public class Laivanupotus {
         }
     }
 
+
     /**
      *
      * Tarkistaa onko laivoja vielä löytämättä eli vieläkö peliä jatketaan
@@ -215,5 +221,10 @@ public class Laivanupotus {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        Laivanupotus peli = new Laivanupotus();
     }
 }

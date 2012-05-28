@@ -45,9 +45,9 @@ public class Teksti {
         for (int i = 0; i < peli.getKorkeus(); i++) {
             for (int j = 0; j < peli.getLeveys(); j++) {
                 if(peli.onkoLaivaa(i, j)) {
-                    System.out.print("L");
+                    System.out.print("L ");
                 } else{
-                    System.out.print("O");
+                    System.out.print("O ");
                 }
             }
             System.out.println();
@@ -56,15 +56,20 @@ public class Teksti {
     public void run() {
         System.out.println("Tervetuloa!");
         
-        
-        Laiva paatti = new Laiva(2);
-        Laiva vene = new Laiva(1);
+        Laiva laiva5 = new Laiva(5);
+        Laiva laiva4 = new Laiva(4);
+        Laiva laiva3 = new Laiva(3);
+        Laiva laiva2 = new Laiva(2);
+        Laiva laiva1 = new Laiva(1);
         
         
         peli.alustaRuudukko();
         
-        peli.sijoitaLaivaSatunnaiseen(paatti);
-        peli.sijoitaLaivaSatunnaiseen(vene);
+        peli.sijoitaLaivaSatunnaiseen(laiva5);
+        peli.sijoitaLaivaSatunnaiseen(laiva4);
+        peli.sijoitaLaivaSatunnaiseen(laiva3);
+        peli.sijoitaLaivaSatunnaiseen(laiva2);
+        peli.sijoitaLaivaSatunnaiseen(laiva1);
         
         ruudukonTulostus();
         
@@ -92,21 +97,21 @@ public class Teksti {
     }
 
     public void tulostaPeli() {
-        System.out.println("  0123456789");
+        System.out.println("  0 1 2 3 4 5 6 7 8 9");
         for (int i = 0; i < peli.getKorkeus(); i++) {
             System.out.print(i + " ");
             for (int j = 0; j < peli.getLeveys(); j++) {
                 if (!peli.onkoAmmuttu(i, j)) {
-                    System.out.print("O");
+                    System.out.print("O ");
                 } else if (peli.onkoAmmuttu(i, j)
                         && !peli.onkoLaivaa(i, j)) {
-                    System.out.print("X");
+                    System.out.print("X ");
                 } else if (peli.onkoAmmuttu(i, j)
                         && peli.onkoLaivaa(i, j)) {
-                    System.out.print("L");
+                    System.out.print("L ");
                 } else if (peli.onkoAmmuttu(i, j)
                         && peli.ruudukko[i][j].getLaiva().onkoUponnut()) {
-                    System.out.print("*");
+                    System.out.print("* ");
                 }
 
             }

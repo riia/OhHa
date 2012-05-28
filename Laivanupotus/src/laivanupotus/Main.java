@@ -19,7 +19,7 @@ public class Main {
 //        
 //        kayttoliittyma.run();
         
-        Graafinen graaf = new Graafinen();
+        Graafinen graaf = new Graafinen(laiva);
         graaf.run();
         
     }
