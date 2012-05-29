@@ -31,7 +31,7 @@ public class Laivanupotus implements ActionListener{
         korkeus = 10;
         leveys = 10;
         this.laivojaJaljella = 0;
-        ruudukko = new Ruutu[leveys][korkeus];
+        ruudukko = new Ruutu[korkeus][leveys];
     }
 
     /**
@@ -112,12 +112,10 @@ public class Laivanupotus implements ActionListener{
                 break;
             }
         }
-        if (sopiiko == true) {
-            return true;
-        } else {
-            return false;
+        return sopiiko == true;
+            
         }
-    }
+    
 
     /**
      *
@@ -193,6 +191,7 @@ public class Laivanupotus implements ActionListener{
      */
     public int ammu(int x, int y) {
 
+        
         if (!osuikoRuudukkoon(x, y) || onkoAmmuttu(x, y)) {
             return -1;
         } else {

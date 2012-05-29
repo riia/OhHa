@@ -37,8 +37,8 @@ public class Graafinen implements Runnable, ActionListener {
     @Override
     public void run() {
         frame = new JFrame("Laivanupotus");
-        frame.setPreferredSize(new Dimension(300, 150));
-        frame.setLayout(new GridLayout(5, 1));
+//        frame.setPreferredSize(new Dimension(300, 150));
+        frame.setLayout(new FlowLayout());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         luoKomponentit(frame.getContentPane());
@@ -51,16 +51,9 @@ public class Graafinen implements Runnable, ActionListener {
         JPanel panel = new JPanel(new GridLayout(peli.getKorkeus(), peli.getLeveys()));
         for (int i = 0; i < peli.getKorkeus(); i++) {
             for (int j = 0; j < peli.getLeveys(); j++) {
-
-                if (peli.onkoAmmuttu(i, j) && !peli.onkoLaivaa(i, j)) {
-                    panel.add(new TextField("X"));
-                } else if (peli.onkoAmmuttu(i, j) && peli.onkoLaivaa(i, j)) {
-                    panel.add(new TextField("L"));
-                } else if (peli.onkoAmmuttu(i, j) && peli.ruudukko[i][j].getLaiva().onkoUponnut()) {
-                    panel.add(new TextField("*"));
-                } else {
-                    panel.add(new JButton("O"));
-                }
+                MunButton ruutu = new MunButton("O",i,j);
+                ruutu.addActionListener(this);
+                    panel.add(ruutu);
             }
         }
 
@@ -71,12 +64,12 @@ public class Graafinen implements Runnable, ActionListener {
 
 
 //
-//        JLabel teksti = new JLabel("Tervetuloa pelaamaan laivanupotusta!");
+        JLabel teksti = new JLabel("Tervetuloa pelaamaan laivanupotusta!");
 //        JLabel nimi = new JLabel("Nimi:");
 //        JTextField nimiKentta = new JTextField(30);
 //        JButton aloitus = new JButton("Aloita peli");
 //
-//        container.add(teksti);
+        container.add(teksti);
 //        container.add(nimi);
 //        container.add(nimiKentta);
 //        container.add(aloitus);
@@ -86,5 +79,8 @@ public class Graafinen implements Runnable, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
+       
+        Object painettu = ae.getSource();
+        
     }
 }

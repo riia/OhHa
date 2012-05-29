@@ -15,12 +15,12 @@ public class Main {
 
     public static void main(String[] args) {
         Laivanupotus laiva = new Laivanupotus();
-//        Teksti kayttoliittyma = new Teksti(laiva);
-//        
-//        kayttoliittyma.run();
+        Teksti kayttoliittyma = new Teksti(laiva);
         
-        Graafinen graaf = new Graafinen(laiva);
-        graaf.run();
+        kayttoliittyma.run();
+        
+//        Graafinen graaf = new Graafinen(laiva);
+//        graaf.run();
         
     }
 }

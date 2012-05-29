@@ -39,11 +39,7 @@ public class Laiva {
      * Tarkistaa onko laiva uponnut
      */
     public boolean onkoUponnut() {
-        if (osumienMaara == koko) {
-            return true;
-        } else {
-            return false;
-        }
+        return osumienMaara == koko;
     }
 
     /**

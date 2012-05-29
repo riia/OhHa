@@ -42,14 +42,15 @@ public class RuutuTest {
     public void konstruktoriLuoAmpumattomanRuudun(){
         Ruutu ruutu = new Ruutu();
         boolean vastaus = ruutu.getAmmuttu();
-        assertEquals(false, vastaus);
+        assertFalse(vastaus);
     }
     
     @Test
     public void konstruktoriLuoLaivattomanRuudun(){
         Ruutu ruutu = new Ruutu();
         Laiva vastaus = ruutu.getLaiva();
-        assertEquals(null, vastaus);
+        assertNull(vastaus);
+        
         
     }
     // TODO add test methods here.

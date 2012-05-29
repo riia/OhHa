@@ -41,15 +41,15 @@ public class LaivanupotusTest {
     public void alustaRuudukkoAlustaaRuudukonLaivattomillaRuuduilla() {
         laivapeli.alustaRuudukko();
         boolean eiLaivaa = true;
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < laivapeli.getKorkeus(); i++) {
+            for (int j = 0; j < laivapeli.getLeveys(); j++) {
                 if (laivapeli.onkoLaivaa(i, j)) {
                     eiLaivaa = false;
                     break;
                 }
             }
         }
-        assertEquals(true, eiLaivaa);
+        assertTrue(eiLaivaa);
 
     }
 
@@ -57,40 +57,40 @@ public class LaivanupotusTest {
     public void alustaRuudukkoAlustaaRuudukonAmpumattomillaRuuduilla() {
         laivapeli.alustaRuudukko();
         boolean ammuttu = false;
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < laivapeli.getKorkeus(); i++) {
+            for (int j = 0; j < laivapeli.getLeveys(); j++) {
                 if (laivapeli.onkoAmmuttu(i, j)) {
                     ammuttu = true;
                 }
             }
         }
-        assertEquals(false, ammuttu);
+        assertFalse(ammuttu);
     }
 
     @Test
     public void onkoAmmuttuPalauttaaTrueKunRuutuunOnJoAmmuttu() {
         laivapeli.ruudukko[1][1].setAmmuttu();
         boolean vastaus = laivapeli.onkoAmmuttu(1, 1);
-        assertEquals(true, vastaus);
+        assertTrue(vastaus);
     }
 
     @Test
     public void onkoAmmuttuPalauttaaFalseKunRuutuunEiOleAmmuttu() {
         boolean vastaus = laivapeli.onkoAmmuttu(1, 1);
-        assertEquals(false, vastaus);
+        assertFalse(vastaus);
     }
 
     @Test
     public void onkoLaivaaPalauttaaTrueKunRuudussaOnLaiva() {
         laivapeli.ruudukko[1][1].setLaiva(paatti);
         boolean vastaus = laivapeli.onkoLaivaa(1, 1);
-        assertEquals(true, vastaus);
+        assertTrue(vastaus);
     }
 
     @Test
     public void onkoLaivaaPalauttaaFalseKunRuudussaEiLaivaa() {
         boolean vastaus = laivapeli.onkoLaivaa(1, 1);
-        assertEquals(false, vastaus);
+        assertFalse(vastaus);
     }
 
     @Test
@@ -126,13 +126,18 @@ public class LaivanupotusTest {
     @Test
     public void sijoitettuLaivaLoytyyRuudusta() {
         boolean vastaus = laivapeli.onkoLaivaa(1, 1);
-        assertEquals(false, vastaus);
+        assertFalse(vastaus);
 
         laivapeli.sijoitaLaiva(paatti, 1, 1);
         vastaus = laivapeli.onkoLaivaa(1, 1);
-        assertEquals(true, vastaus);
+        assertTrue(vastaus);
     }
 
+    @Test
+    public void ammuMetodiPalauttaaNollaKunEiOsuta(){
+        int vastaus = laivapeli.ammu(1, 1);
+        assertEquals(0, vastaus);
+    }
     @Test
     public void ammuMetodiOsuuKunAmmutaanRuutuunJossaLaiva() {
         laivapeli.sijoitaLaiva(paatti, 1, 1);
@@ -152,13 +157,13 @@ public class LaivanupotusTest {
     @Test
     public void sopivaLaivaSopiiRuudukkoon() {
         boolean vastaus = laivapeli.sopiikoLaiva(1, 1, 0, paatti);
-        assertEquals(true, vastaus);
+        assertTrue(vastaus);
     }
 
     @Test
     public void laivaaEiVoiSijoittaaRuudukonUlkopuolelle() {
         boolean vastaus = laivapeli.sopiikoLaiva(9, 9, 0, paatti);
-        assertEquals(false, vastaus);
+        assertFalse(vastaus);
     }
 
     @Test
@@ -172,12 +177,12 @@ public class LaivanupotusTest {
     public void peliaOnJaljellaKunLaivojaOnAmpumatta() {
         laivapeli.sijoitaLaivaSatunnaiseen(paatti);
         boolean vastaus = laivapeli.onkoPeliaJaljella();
-        assertEquals(true, vastaus);
+        assertTrue(vastaus);
     }
 
     @Test
     public void peliaEiOleJaljellaKunKaikkiLaivatUpotettu() {
         boolean vastaus = laivapeli.onkoPeliaJaljella();
-        assertEquals(false, vastaus);
+        assertFalse(vastaus);
     }
 }
