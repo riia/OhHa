@@ -4,23 +4,25 @@
  */
 package laivanupotus;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+
 
 /**
  * Laivanupotuspelin pelialusta. Ruutu-olioista koostuva ruudukko, jonne voi
  * sijoittaa laivoja ja jota voi ampua.
  * 
  */
-public class Laivanupotus implements ActionListener{
-
+public class Laivanupotus {
+    FileWriter kirjoittaja;
+    Scanner tiedostoLukija;
     Scanner scan = new Scanner(System.in);
     ArrayList<Pelaaja> Lista = new ArrayList<Pelaaja>();
-    Pelaaja pelaaja;
+    Pelaaja pelaaja = new Pelaaja();
     int ampumistenMaara = 0;
     int laivojaJaljella;
     int korkeus;
@@ -81,14 +83,30 @@ public class Laivanupotus implements ActionListener{
 
     /**
      *
-     * Kysytään käyttäjän nimi tuloslistaa varten
+     * Palauttaa ampumiskertojen lukumäärän.
      */
-    public void setPelaaja(Pelaaja pelaaja) {
-        this.pelaaja = pelaaja;
-
+    public int getAmpumistenMaara() {
+        return ampumistenMaara;
+    }
+    /**
+     *
+     * Palauttaa pelaajan.
+     */
+    public Pelaaja getPelaaja(){
+        return pelaaja;
     }
 
-    
+
+    /**
+     *
+     * Lisää pelaajan nimen ja tuloksen tuloslistaan.
+     */
+    public void lisaaPelaajaListaan(Pelaaja pelaaja) throws IOException {
+        kirjoittaja = new FileWriter("Lista.txt");
+        kirjoittaja.write(pelaaja + "\n");
+        kirjoittaja.close();
+    }
+
     /**
      *
      * Tarkistaa voiko laivaa sijoittaa kohdasta (x,y) lähtien
@@ -113,9 +131,8 @@ public class Laivanupotus implements ActionListener{
             }
         }
         return sopiiko == true;
-            
-        }
-    
+
+    }
 
     /**
      *
@@ -171,10 +188,7 @@ public class Laivanupotus implements ActionListener{
      * Tarkistaa onko ruudussa laivaa
      */
     public boolean onkoLaivaa(int x, int y) {
-        if (ruudukko[x][y].getLaiva() == null) {
-            return false;
-        }
-        return true;
+        return ruudukko[x][y].getLaiva() != null;
     }
 
     /**
@@ -191,7 +205,6 @@ public class Laivanupotus implements ActionListener{
      */
     public int ammu(int x, int y) {
 
-        
         if (!osuikoRuudukkoon(x, y) || onkoAmmuttu(x, y)) {
             return -1;
         } else {
@@ -209,21 +222,13 @@ public class Laivanupotus implements ActionListener{
         }
     }
 
-
     /**
      *
      * Tarkistaa onko laivoja vielä löytämättä eli vieläkö peliä jatketaan
      */
     public boolean onkoPeliaJaljella() {
-        if (laivojaJaljella > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return laivojaJaljella > 0;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        Laivanupotus peli = new Laivanupotus();
-    }
+
 }

@@ -13,13 +13,11 @@ public class Pelaaja {
     String nimi;
     int parasTulos;
     
-    public Pelaaja(String nimi){
-        this.nimi = nimi;
-        
+    public Pelaaja(){
     }
     /**
      *
-     * Palauttaa pelaajan nimen
+     * Palauttaa pelaajan nimen.
      */
     public String getNimi(){
         return nimi;
@@ -27,16 +25,28 @@ public class Pelaaja {
     
     /**
      *
-     * Palauttaa pelaajan parhaan tuloksen
+     * Palauttaa pelaajan parhaan tuloksen.
      */
     public int getParasTulos(){
         return parasTulos;
     }
     /**
      *
-     * Asettaa pelaajalle parhaan tuloksen
+     * Asettaa pelaajalle nimen.
+     */
+    public void setNimi(String nimi){
+        this.nimi = nimi;
+    }
+    /**
+     *
+     * Asettaa pelaajalle parhaan tuloksen.
      */
     public void setParasTulos(int tulos){
         this.parasTulos = tulos;
+    }
+    
+    @Override
+    public String toString(){
+        return nimi + "." +  parasTulos;
     }
 }

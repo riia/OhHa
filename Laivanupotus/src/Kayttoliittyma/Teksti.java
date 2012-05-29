@@ -4,6 +4,7 @@
  */
 package Kayttoliittyma;
 
+import java.io.IOException;
 import java.util.Scanner;
 import laivanupotus.Laiva;
 import laivanupotus.Laivanupotus;
@@ -21,8 +22,6 @@ public class Teksti {
 
     public Teksti(Laivanupotus laiva) {
         this.peli = laiva;
-
-
     }
 
     /**
@@ -41,7 +40,7 @@ public class Teksti {
     public void kysyPelaaja() {
         System.out.println("Nimesi:");
         String nimi = scan.nextLine();
-
+        peli.getPelaaja().setNimi(nimi);
     }
 
     public void ruudukonTulostus() {
@@ -57,14 +56,13 @@ public class Teksti {
         }
     }
 
-    public void run() {
-        System.out.println("Tervetuloa!");
+    public void run() throws IOException {
+        System.out.println("Tervetuloa pelaamaan laivanupotusta!");
 
         Laiva laiva5 = new Laiva(5);
         Laiva laiva4 = new Laiva(4);
         Laiva laiva3 = new Laiva(3);
         Laiva laiva2 = new Laiva(2);
-        Laiva laiva1 = new Laiva(1);
 
         peli.alustaRuudukko();
 
@@ -72,12 +70,10 @@ public class Teksti {
         peli.sijoitaLaivaSatunnaiseen(laiva4);
         peli.sijoitaLaivaSatunnaiseen(laiva3);
         peli.sijoitaLaivaSatunnaiseen(laiva2);
-        peli.sijoitaLaivaSatunnaiseen(laiva1);
-
-        ruudukonTulostus();
-
+        
+        tulostaPeli();
         while (peli.onkoPeliaJaljella()) {
-            tulostaPeli();
+
             System.out.println("Valitse rivi (-1 lopettaa):");
             rivi = scan.nextInt();
             if (rivi == -1) {
@@ -88,19 +84,22 @@ public class Teksti {
             sarake = scan.nextInt();
             int osuiko = peli.ammu(rivi, sarake);
             if (osuiko == -1) {
-                System.out.println("Et voi ampua tähän ruutun.");
+                System.out.println("\nEt voi ampua tähän ruutun.\n");
             } else {
-
                 if (osuiko == 2) {
-                    System.out.println("Osui ja upposi!");
+                    System.out.println("\n***  Osui ja upposi!  ***\n");
                 } else if (osuiko == 1) {
-                    System.out.println("Osui!");
+                    System.out.println("\n* Osui! *\n");
                 } else {
-                    System.out.println("Ohi meni.");
+                    System.out.println("\nOhi meni.\n");
                 }
             }
+            tulostaPeli();
         }
         System.out.println("Peli loppui!");
+        System.out.println("Ammuit " + peli.getAmpumistenMaara() + " kertaa.");
+        peli.getPelaaja().setParasTulos(peli.getAmpumistenMaara());
+        peli.lisaaPelaajaListaan(peli.getPelaaja());
     }
 
     public void tulostaPeli() {
@@ -123,11 +122,15 @@ public class Teksti {
                 } else {
                     System.out.print("O ");
                 }
-
-
-
             }
             System.out.println();
+        }
+    }
+
+    public void tulostaTuloslista() {
+        Scanner tiedostoLukija = new Scanner("Lista.txt");
+        while (tiedostoLukija.hasNext()) {
+            System.out.println(tiedostoLukija.nextLine());
         }
     }
 }

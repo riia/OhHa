@@ -6,6 +6,7 @@ package laivanupotus;
 
 import Kayttoliittyma.Graafinen;
 import Kayttoliittyma.Teksti;
+import java.io.IOException;
 
 /**
  *
@@ -13,7 +14,7 @@ import Kayttoliittyma.Teksti;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Laivanupotus laiva = new Laivanupotus();
         Teksti kayttoliittyma = new Teksti(laiva);
         
