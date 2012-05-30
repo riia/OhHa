@@ -19,9 +19,9 @@ import java.util.Scanner;
  */
 public class Laivanupotus {
     FileWriter kirjoittaja;
+    ArrayList<Pelaaja> lista = new ArrayList<Pelaaja>();
     Scanner tiedostoLukija;
     Scanner scan = new Scanner(System.in);
-    ArrayList<Pelaaja> Lista = new ArrayList<Pelaaja>();
     Pelaaja pelaaja = new Pelaaja();
     int ampumistenMaara = 0;
     int laivojaJaljella;
@@ -47,6 +47,7 @@ public class Laivanupotus {
     /**
      *
      * Asettaa ruudukon leveyden
+     * 
      */
     public void setLeveys(int leveys) {
         this.leveys = leveys;
@@ -106,10 +107,15 @@ public class Laivanupotus {
         kirjoittaja.write(pelaaja + "\n");
         kirjoittaja.close();
     }
+ 
 
     /**
      *
      * Tarkistaa voiko laivaa sijoittaa kohdasta (x,y) lähtien
+     * @param x         ruudukon rivi, jolle laivaa ollaan sijoittamassa
+     * @param y         ruudukon sarake, jolle laivaa ollaan sijoittamassa
+     * @param suunta    0 tai 1
+     * @param laiva     Laiva
      */
     public boolean sopiikoLaiva(int x, int y, int suunta, Laiva laiva) {
         int laivaaJaljella = laiva.getKoko();

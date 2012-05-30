@@ -72,10 +72,13 @@ public class Teksti {
         peli.sijoitaLaivaSatunnaiseen(laiva2);
         
         tulostaPeli();
+        
+        
         while (peli.onkoPeliaJaljella()) {
-
+            
             System.out.println("Valitse rivi (-1 lopettaa):");
             rivi = scan.nextInt();
+            
             if (rivi == -1) {
                 System.out.println("Lopetit pelin.");
                 break;
