@@ -4,6 +4,8 @@
  */
 package Kayttoliittyma;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import laivanupotus.Laiva;
@@ -15,6 +17,7 @@ import laivanupotus.Laivanupotus;
  */
 public class Teksti {
 
+    File file = new File("Lista.txt");
     Laivanupotus peli;
     Scanner scan = new Scanner(System.in);
     int rivi;
@@ -36,7 +39,9 @@ public class Teksti {
         int leveys = scan.nextInt();
         peli.setLeveys(leveys);
     }
-
+    /**
+     * Kysyy pelaajan nimen ja asettaa sen Pelaajalle
+     */
     public void kysyPelaaja() {
         System.out.println("Nimesi:");
         String nimi = scan.nextLine();
@@ -56,6 +61,12 @@ public class Teksti {
         }
     }
 
+    public void tulosLista(File tiedosto) throws FileNotFoundException{
+        Scanner lukija = new Scanner(tiedosto);
+        while(lukija.hasNext()){
+            System.out.println(lukija.nextLine());
+        }
+    }
     public void run() throws IOException {
         System.out.println("Tervetuloa pelaamaan laivanupotusta!");
 
@@ -71,6 +82,7 @@ public class Teksti {
         peli.sijoitaLaivaSatunnaiseen(laiva3);
         peli.sijoitaLaivaSatunnaiseen(laiva2);
         
+        kysyPelaaja();
         tulostaPeli();
         
         
@@ -103,8 +115,11 @@ public class Teksti {
         System.out.println("Ammuit " + peli.getAmpumistenMaara() + " kertaa.");
         peli.getPelaaja().setParasTulos(peli.getAmpumistenMaara());
         peli.lisaaPelaajaListaan(peli.getPelaaja());
+        tulosLista(file);
     }
-
+    /**
+     * Tulostaa peliruudukon 
+     */
     public void tulostaPeli() {
         System.out.println("  0 1 2 3 4 5 6 7 8 9");
         for (int i = 0; i < peli.getKorkeus(); i++) {
@@ -130,10 +145,11 @@ public class Teksti {
         }
     }
 
-    public void tulostaTuloslista() {
-        Scanner tiedostoLukija = new Scanner("Lista.txt");
+    public void tulostaTuloslista() throws FileNotFoundException {
+        Scanner tiedostoLukija = new Scanner(file);
         while (tiedostoLukija.hasNext()) {
-            System.out.println(tiedostoLukija.nextLine());
+            String tiedostonRivi = tiedostoLukija.nextLine();
+            System.out.println(tiedostonRivi);
         }
     }
 }

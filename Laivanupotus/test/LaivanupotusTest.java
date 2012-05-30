@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 
+import java.io.IOException;
 import laivanupotus.Laiva;
 import laivanupotus.Laivanupotus;
 import org.junit.After;
@@ -184,5 +185,10 @@ public class LaivanupotusTest {
     public void peliaEiOleJaljellaKunKaikkiLaivatUpotettu() {
         boolean vastaus = laivapeli.onkoPeliaJaljella();
         assertFalse(vastaus);
+    }
+    
+    @Test
+    public void pelaajaLisataanListaan() throws IOException{
+        
     }
 }

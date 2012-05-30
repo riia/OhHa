@@ -5,14 +5,18 @@
 package laivanupotus;
 
 /**
- *
  * Ruutu-luokka. Ruutuun voi sijoittaa Laiva-olion ja ruudulla on tieto onko
  * sitä ammuttu.
  */
 public class Ruutu {
 
-    
+    /**
+     * Laiva joka ruudussa on
+     */
     Laiva laiva;
+    /**
+     * True jos ruutuun on ammuttu
+     */
     boolean ammuttu;
 
     public Ruutu() {
@@ -21,23 +25,22 @@ public class Ruutu {
     }
 
     /**
-     *
      * Kertoo onko ruutua ammuttu
+     * @return true jos ruutua on ammuttu
      */
     public boolean getAmmuttu() {
         return ammuttu;
     }
 
     /**
-     *
      * Palauttaa ruudussa olevan laivan
+     * @return Laiva joka on ruudussa, null jos laivaa ei ole
      */
     public Laiva getLaiva() {
         return laiva;
     }
 
     /**
-     *
      * Määrittää ruudun ammutuksi
      */
     public void setAmmuttu() {
@@ -45,7 +48,6 @@ public class Ruutu {
     }
 
     /**
-     *
      * Asettaa ruutuun laivan
      */
     public void setLaiva(Laiva laiva) {

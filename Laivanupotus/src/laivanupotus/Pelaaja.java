@@ -5,12 +5,17 @@
 package laivanupotus;
 
 /**
- *
  * Ppelaaja-luokasta löytyy pelaajan nimi ja paras tulos pelissä.
  */
 public class Pelaaja {
     
+    /**
+     * Pelaajan nimi
+     */
     String nimi;
+    /**
+     * Pelaajan paras tulos
+     */
     int parasTulos;
     
     public Pelaaja(){

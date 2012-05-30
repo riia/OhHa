@@ -4,29 +4,49 @@
  */
 package laivanupotus;
 
-
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.Random;
 import java.util.Scanner;
 
-
 /**
- * Laivanupotuspelin pelialusta. Ruutu-olioista koostuva ruudukko, jonne voi
+ * Laivanupotuspelin pelialusta. Sisältää Ruutu-olioista koostuvan ruudukon, jonne voi
  * sijoittaa laivoja ja jota voi ampua.
+ * 
  * 
  */
 public class Laivanupotus {
+
+    File lista = new File("Lista.txt");
     FileWriter kirjoittaja;
-    ArrayList<Pelaaja> lista = new ArrayList<Pelaaja>();
-    Scanner tiedostoLukija;
+
+//    Scanner tiedostoLukija = new Scanner(lista);
     Scanner scan = new Scanner(System.in);
+    /**
+     * Pelin pelaaja
+     */
     Pelaaja pelaaja = new Pelaaja();
+    /**
+     * Arvo, joka kertoo kuinka monta kertaa pelaaja on pelissä ampunut.
+     */
     int ampumistenMaara = 0;
+    /**
+     * Kertoo kuinka monta laivaa pelissä on vielä upottamatta.
+     */
     int laivojaJaljella;
+    /**
+     * Peliruudukon korkeus
+     */
     int korkeus;
+    /**
+     * Peliruudukon leveys
+     */
     int leveys;
+    /**
+     * Itse peliruudukko, jossa ammuttavat ruudut.
+     */
     public Ruutu[][] ruudukko;
 
     public Laivanupotus() {
@@ -54,7 +74,6 @@ public class Laivanupotus {
     }
 
     /**
-     *
      * Alustaa pelialueen tyhjillä ruuduilla
      */
     public void alustaRuudukko() {
@@ -89,33 +108,35 @@ public class Laivanupotus {
     public int getAmpumistenMaara() {
         return ampumistenMaara;
     }
+
     /**
      *
      * Palauttaa pelaajan.
      */
-    public Pelaaja getPelaaja(){
+    public Pelaaja getPelaaja() {
         return pelaaja;
     }
 
-
     /**
-     *
-     * Lisää pelaajan nimen ja tuloksen tuloslistaan.
+     *  Lisää pelaajan nimen ja tuloksen tuloslistaan.
+     * @param pelaaja Lisättävä pelaajaa
      */
     public void lisaaPelaajaListaan(Pelaaja pelaaja) throws IOException {
         kirjoittaja = new FileWriter("Lista.txt");
-        kirjoittaja.write(pelaaja + "\n");
+        
+        kirjoittaja.append(pelaaja + "\n");
         kirjoittaja.close();
     }
- 
 
     /**
      *
      * Tarkistaa voiko laivaa sijoittaa kohdasta (x,y) lähtien
-     * @param x         ruudukon rivi, jolle laivaa ollaan sijoittamassa
-     * @param y         ruudukon sarake, jolle laivaa ollaan sijoittamassa
+     * @param x         käyttäjän antama ruudukon rivi, johon laivaa ollaan 
+     *                  sijoittamassa
+     * @param y         käyttäjän antama ruudukon sarake, johon laivaa ollaan 
+     *                  sijoittamassa
      * @param suunta    0 tai 1
-     * @param laiva     Laiva
+     * @param laiva     Käyttäjän antama Laiva-olio
      */
     public boolean sopiikoLaiva(int x, int y, int suunta, Laiva laiva) {
         int laivaaJaljella = laiva.getKoko();
@@ -143,6 +164,7 @@ public class Laivanupotus {
     /**
      *
      * Sijoittaa laivan satunnaisesesta ruudusta lähtien
+     * @param laiva Käyttäjän antama laiva joka sijoitetaan
      */
     public void sijoitaLaivaSatunnaiseen(Laiva laiva) {
         Random arpoja = new Random();
@@ -171,16 +193,18 @@ public class Laivanupotus {
     }
 
     /**
-     *
      * Sijoittaa laivan ruudukkoon kohtaan (x,y)
+     * @param laiva sijoitettava laiva
+     * @param x rivi, johon sijoitetaan
+     * @param y sarake, johon sijoitetaan
      */
     public void sijoitaLaiva(Laiva laiva, int x, int y) {
         ruudukko[x][y].setLaiva(laiva);
     }
 
     /**
-     *
      * Tarkistaa ovatko koordinaatit ruudukolla
+     * @return true jos koordinaatit löytyvät ruudukosta
      */
     public boolean osuikoRuudukkoon(int x, int y) {
         if (x < 0 || y < 0 || x >= korkeus || y >= leveys) {
@@ -190,24 +214,29 @@ public class Laivanupotus {
     }
 
     /**
-     *
      * Tarkistaa onko ruudussa laivaa
+     * @return true jos ruudussa on jokin laiva
      */
     public boolean onkoLaivaa(int x, int y) {
         return ruudukko[x][y].getLaiva() != null;
     }
 
     /**
-     *
-     * Tarkistaa onko ruutua jo ammuttu
+     *  Tarkistaa onko ruutua jo ammuttu
+     * @return true jos ruutua on ammuttu
      */
     public boolean onkoAmmuttu(int x, int y) {
         return ruudukko[x][y].getAmmuttu();
     }
 
     /**
-     *
-     * Ammutaan ruutua
+     * Ampuu ruutua. Tarkistaa, voiko kyseiseen ruutuun ampua ja onko 
+     * ruudussa laivaa sekä toimii näiden tietojen mukaan.
+     * 
+     * @param x Ruudukon rivi johon ammutaan
+     * @param y Ruudukon sarake johon ammutaan
+     * @return -1 jos ruutuun ei voi ampua, 0-2 sen mukaan onko ruudussa laivaa
+     *          ja onko mahdollinen laiva uponnut
      */
     public int ammu(int x, int y) {
 
@@ -227,14 +256,12 @@ public class Laivanupotus {
             return 0;
         }
     }
-
+    
     /**
-     *
      * Tarkistaa onko laivoja vielä löytämättä eli vieläkö peliä jatketaan
+     * @return True jos pelissä vielä laivoja
      */
     public boolean onkoPeliaJaljella() {
         return laivojaJaljella > 0;
     }
-
-
 }

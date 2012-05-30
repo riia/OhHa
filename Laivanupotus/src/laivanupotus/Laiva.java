@@ -10,7 +10,13 @@ package laivanupotus;
  */
 public class Laiva {
 
+    /**
+     * Laivan koko eli moneenko ruutuun se voidaan sijoittaa
+     */
     private int koko = 0;
+    /**
+     * Kuinka monta kertaa laivaan on osuttu.
+     */
     private int osumienMaara;
 
     public Laiva(int koko) {
@@ -19,31 +25,30 @@ public class Laiva {
     }
 
     /**
-     *
      * Palauttaa laivan koon
+     * @return Laivan koko
      */
     public int getKoko() {
         return koko;
     }
 
     /**
-     *
      * Palauttaa laivan osumien määrän
+     * @return Laivan osumien määrä
      */
     public int getOsumienMaara() {
         return osumienMaara;
     }
 
     /**
-     *
-     * Tarkistaa onko laiva uponnut
+     *  Tarkistaa onko laiva uponnut
+     * @return true jos laivaan on osuttu laivan koon verran
      */
     public boolean onkoUponnut() {
         return osumienMaara == koko;
     }
 
     /**
-     *
      * Lisää laivan osumien määrää
      */
     public void osuLaivaan() {
