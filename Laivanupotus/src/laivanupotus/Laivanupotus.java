@@ -118,14 +118,14 @@ public class Laivanupotus {
     }
 
     /**
-     *  Lisää pelaajan nimen ja tuloksen tuloslistaan.
+     *  Lisää pelaajan nimen ja tuloksen tuloslistaan. 
      * @param pelaaja Lisättävä pelaajaa
      */
     public void lisaaPelaajaListaan(Pelaaja pelaaja) throws IOException {
-        kirjoittaja = new FileWriter("Lista.txt");
-        
+        kirjoittaja = new FileWriter(lista);
         kirjoittaja.append(pelaaja + "\n");
         kirjoittaja.close();
+        // ei toimi
     }
 
     /**

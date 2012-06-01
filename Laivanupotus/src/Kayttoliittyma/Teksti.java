@@ -114,8 +114,7 @@ public class Teksti {
         System.out.println("Peli loppui!");
         System.out.println("Ammuit " + peli.getAmpumistenMaara() + " kertaa.");
         peli.getPelaaja().setParasTulos(peli.getAmpumistenMaara());
-        peli.lisaaPelaajaListaan(peli.getPelaaja());
-        tulosLista(file);
+        
     }
     /**
      * Tulostaa peliruudukon 

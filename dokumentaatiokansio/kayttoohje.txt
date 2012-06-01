@@ -1,0 +1,3 @@
+Käyttöohje: Laivanupotus
+
+Pelaaja näkee näytöllä ruudukon ja häneltä kysytään riviä ja saraketta, joille ammutaan. Pelaaja syöttää molempiin kohtiin kokonaisluvun. Ohjelma ilmoittaa osuiko pelaaja laivaan ja upposiko laiva. Peli jatkuu kunnes kaikki laivat on upotettu. Pelin voi myös lopettaa syöttämällä "-1". 

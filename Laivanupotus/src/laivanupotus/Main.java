@@ -4,7 +4,7 @@
  */
 package laivanupotus;
 
-import Kayttoliittyma.Graafinen;
+
 import Kayttoliittyma.Teksti;
 import java.io.IOException;
 

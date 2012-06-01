@@ -23,7 +23,7 @@ import laivanupotus.Laivanupotus;
 
 /**
  *
- * Laivanupotuspelin graafinen käyttöliittymä.
+ * Laivanupotuspelin graafinen käyttöliittymä. Ei toimi.
  */
 public class Graafinen implements Runnable, ActionListener {
 
